@@ -75,6 +75,43 @@ public:
 
     }
 
+    void calculateAllTemperatures() {
+      //  double* gauss_seidel(double** h_global, double* p_global,int iteration){
+            double *temperatures = new double[GlobalData::numberOfNodes];
+            double *y = new double[GlobalData::numberOfNodes];
+            int iteration = 100000;
+
+            for (int i = 0; i <GlobalData::numberOfNodes ; ++i) {
+                temperatures[i]=0;
+                y[i]=0;
+            }
+
+            while(iteration>0)
+            {
+                for(int i=0;i<GlobalData::numberOfNodes;i++)
+                {
+                    y[i]=(globalPVector[i][0]/globalHMatrix[i][i]);
+                    for(int j=0;j<GlobalData::numberOfNodes;j++) {
+                        if (j == i)
+                            continue;
+                        y[i] = y[i] - ((globalHMatrix[i][j] / globalHMatrix[i][i]) * temperatures[j]);
+                        temperatures[i] = y[i];
+                    }
+                }
+                iteration--;
+            }
+
+        for (int i= 0 ; i < GlobalData::numberOfNodes; ++i){
+            elements[0].nodes[i].temperature = temperatures[i];
+        }
+    }
+
+    void printTemperatures() {
+        std::cout << "\nGLOBAL TEMPERATURE MAP:" << std::endl;
+        for (int i=0 ; i < GlobalData::numberOfNodes; ++i)
+            std::cout << "Node[" << elements[0].nodes[i].nodeID << "], Temp: " <<elements[0].nodes[i].temperature << std::endl;
+    }
+
 private:
     void initializeGlobalPVector() {
         //is in constructor - FIX DAT SHIT

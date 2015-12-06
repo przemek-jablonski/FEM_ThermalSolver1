@@ -20,23 +20,39 @@ int main() {
 
 
 
-    //NODES creation (count-agnostic):
+    //MANUAL: Node Map for 5node-4element model:
+
     nodes[0] = Node(0,GlobalData::thermalStreamQ);
     nodes[1] = Node(1);
     nodes[2] = Node(2);
     nodes[3] = Node(3);
     nodes[4] = Node(4, 0, GlobalData::alpha, GlobalData::tInfinity);
 
-    //ELEMENTS creation (count-agnostic):
-    elements[0] = FiniteElement(0, 2, nodes, GlobalData::elementsLength[0],
-                                GlobalData::elementsCrossSection[0], GlobalData::elementsConductivity[0]);
-    elements[1] = FiniteElement(1, 2, nodes, GlobalData::elementsLength[1],
-                                GlobalData::elementsCrossSection[1], GlobalData::elementsConductivity[1]);
-    elements[2] = FiniteElement(2, 2, nodes, GlobalData::elementsLength[2],
-                                GlobalData::elementsCrossSection[2], GlobalData::elementsConductivity[2]);
-    elements[3] = FiniteElement(3, 2, nodes, GlobalData::elementsLength[3],
-                                GlobalData::elementsCrossSection[3], GlobalData::elementsConductivity[3]);
 
+    //MANUAL: Node Map for 3node-2element model:
+    /*
+    nodes[0] = Node(0,GlobalData::thermalStreamQ);
+    nodes[1] = Node(1);
+    nodes[2] = Node(2, 0, GlobalData::alpha, GlobalData::tInfinity);
+    */
+
+
+    //ELEMENTS creation (count-agnostic):
+    /*
+    elements[0] = FiniteElement(0, GlobalData::nodesPerElement, nodes, GlobalData::elementsLength[0],
+                                GlobalData::elementsCrossSection[0], GlobalData::elementsConductivity[0]);
+    elements[1] = FiniteElement(1, GlobalData::nodesPerElement, nodes, GlobalData::elementsLength[1],
+                                GlobalData::elementsCrossSection[1], GlobalData::elementsConductivity[1]);
+    elements[2] = FiniteElement(2, GlobalData::nodesPerElement, nodes, GlobalData::elementsLength[2],
+                                GlobalData::elementsCrossSection[2], GlobalData::elementsConductivity[2]);
+    elements[3] = FiniteElement(3, GlobalData::nodesPerElement, nodes, GlobalData::elementsLength[3],
+                                GlobalData::elementsCrossSection[3], GlobalData::elementsConductivity[3]);
+*/
+
+    for (int i=0; i < GlobalData::numberOfElements; ++i) {
+        elements[i] = FiniteElement(i, GlobalData::nodesPerElement, nodes, GlobalData::elementsLength[i],
+                                    GlobalData::elementsCrossSection[i], GlobalData::elementsConductivity[i]);
+    }
 
 
     //Calculating local data for every element.
@@ -54,7 +70,8 @@ int main() {
     femGrid.printGlobalHMatrix();
     femGrid.printGlobalPVector();
 
-
+    femGrid.calculateAllTemperatures();
+    femGrid.printTemperatures();
 
 
     //Deallocating containers:
