@@ -30,14 +30,14 @@
     <favorites_list name="MesThermalSolver1" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.52803737">
+    <splitter split-orientation="horizontal" split-proportion="0.4470405">
       <split-first>
         <leaf>
           <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7020785">
-                  <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+                <state vertical-scroll-proportion="0.69284064">
+                  <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
                   <folding>
                     <element signature="e#0#19#0" expanded="true" />
                   </folding>
@@ -92,7 +92,7 @@
           <file leaf-file-name="FiniteElement.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/FiniteElement.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.65357965">
+                <state vertical-scroll-proportion="1.8660508">
                   <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
                   <folding>
                     <element signature="e#140#157#0" expanded="true" />
@@ -321,7 +321,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FiniteElement.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65357965">
+        <state vertical-scroll-proportion="1.8660508">
           <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
           <folding>
             <element signature="e#140#157#0" expanded="true" />
@@ -331,8 +331,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7020785">
-          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.69284064">
+          <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
