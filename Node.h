@@ -21,6 +21,7 @@ public:
     }
 
     Node(int nodeID, float thermalStreamQ = 0, float alpha = 0, float tInfinity = 0) {
+        std::cout << "Created Node(" << nodeID <<")->\tbc1: " << boundaryCondition1 << ", bc2: " << boundaryCondition2 << std::endl;
         this->nodeID = nodeID;
         temperature= -666;
         this->boundaryCondition1 = thermalStreamQ;

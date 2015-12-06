@@ -33,6 +33,7 @@ public:
 
     FiniteElement(int elementID, int nodeCount, Node *nodes,
                   float localLength, float localCrossSection, float localThermalConductivity) {
+        std::cout << "Created Element(" << elementID << "). " << std::endl;
         this->elementID = elementID;
         this->nodeCount = nodeCount;
         this->nodes = nodes;

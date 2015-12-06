@@ -5,3 +5,6 @@ nodeInElement    - how many nodes are connected to element
 globalLength     - overall length of a model
 globalK          - overall thermal conductivity of a model
 globalS          - overall cross section of a model
+
+
+todo NEXT!: switch some implementation to .cpp files!
