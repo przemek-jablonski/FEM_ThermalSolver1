@@ -14,9 +14,9 @@ public:
 
     //change this to dyn array of pointers to nodes
     // (according to nodeCount)
-    Node *node1;
-    Node *node2;
+    Node *nodes;
     int   nodeCount;
+    int   elementID;
 
     float localLength;
     float localCrossSection;
@@ -31,11 +31,11 @@ public:
 
     }
 
-    FiniteElement(int nodeCount, Node *node1, Node *node2,
+    FiniteElement(int elementID, int nodeCount, Node *nodes,
                   float localLength, float localCrossSection, float localThermalConductivity) {
+        this->elementID = elementID;
         this->nodeCount = nodeCount;
-        this->node1 = node1;
-        this->node2 = node2;
+        this->nodes = nodes;
         this->localLength = localLength;
         this->localCrossSection = localCrossSection;
         this->localThermalConductivity = localThermalConductivity;
@@ -70,14 +70,17 @@ public:
         localPVector[0][0] = 0;
         localPVector[1][0] = 0;
 
-        //calculation
-        //node1:
-        localPVector[0][0] += node1->boundaryCondition1 * this->localCrossSection;
-        localPVector[1][0] += node1->boundaryCondition2 * this->localCrossSection;
+        for (int n=elementID ; n < elementID+2; ++n) {
+            localPVector[0][0] += nodes[n].boundaryCondition1 * this->localCrossSection;
+            localPVector[1][0] += nodes[n].boundaryCondition2 * this->localCrossSection;
 
-        //node2:
-        localPVector[0][0] += node2->boundaryCondition1 * (-1) * this->localCrossSection;
-        localPVector[1][0] += node2->boundaryCondition2 * (-1) * this->localCrossSection;
+            if (nodes[n].nodeID == (GlobalData::numberOfNodes -1) ){
+                localPVector[0][0] *= -1;
+                localPVector[1][0] *= -1;
+            }
+        }
+
+
 
 
     }
@@ -90,13 +93,14 @@ public:
 
 
     void print() {
-        std::cout << "\nFiniteElement::print():" << std::endl;
-        node1->print();
-        node2->print();
+        std::cout << "\nFiniteElement[" << elementID << "]::print():" << std::endl;
+        for (int n=0 ; n < GlobalData::numberOfNodes; ++n) {
+            nodes[n].print();
+        }
     }
 
     void printLocalMatrixes() {
-        std::cout << "\nFiniteElement::printLocalMatrixes():" << std::endl;
+        std::cout << "\nFiniteElement[" << elementID << "]::printLocalMatrixes():" << std::endl;
         std::cout << "Local H Matrix:" << std::endl;
 
         for (int i=0; i < localHMatrix.size(); ++i) {
@@ -107,7 +111,7 @@ public:
             std::cout << "]" << std::endl;
         }
 
-        std::cout << "\nLocal P Vector:" << std::endl;
+        std::cout << "Local P Vector:" << std::endl;
         for (int i = 0 ; i < localPVector.size(); ++i) {
             std::cout << "[ ";
              for (int j = 0 ; j < localPVector[i].size(); ++j) {

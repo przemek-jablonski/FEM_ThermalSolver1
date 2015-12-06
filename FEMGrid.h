@@ -60,6 +60,9 @@ public:
                 }
             }
         }
+
+        globalHMatrix[globalHMatrix.size()-1][globalHMatrix.size()-1] +=
+                GlobalData::alpha * elements[elementsCount-1].localCrossSection;
     }
 
     void calculateGlobalPVector(){
