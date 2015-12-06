@@ -1,0 +1,7 @@
+elementsCount    - how many elements in a model
+nodesCount       - how many nodes in a model
+nodeInElement    - how many nodes are connected to element
+
+globalLength     - overall length of a model
+globalK          - overall thermal conductivity of a model
+globalS          - overall cross section of a model
