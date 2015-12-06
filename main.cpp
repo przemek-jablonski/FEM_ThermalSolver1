@@ -38,13 +38,13 @@ int main() {
     std::vector<Node>   nodes(GlobalData::numberOfNodes);
     FiniteElement      *elements = new FiniteElement[GlobalData::numberOfElements];
 
-    nodes[0] = Node(0,0,0);
-    nodes[1] = Node(1,0,0);
-    nodes[2] = Node(2,0,0);
+    nodes[0] = Node(0,q/2);
+    nodes[1] = Node(1);
+    nodes[2] = Node(2, 0, alpha, tInfinity);
 
-    elements[0] = FiniteElement(&nodes[0], &nodes[1], elementsLength[0],
+    elements[0] = FiniteElement(2, &nodes[0], &nodes[1], elementsLength[0],
                                 elementsCrossSection[0], elementsConductivity[0]);
-    elements[1] = FiniteElement(&nodes[1], &nodes[2], elementsLength[1],
+    elements[1] = FiniteElement(2, &nodes[1], &nodes[2], elementsLength[1],
                                 elementsCrossSection[1], elementsConductivity[1]);
 
 
@@ -55,12 +55,25 @@ int main() {
 //    femGrid.addElementToGrid(elements[1]);
 //    femGrid.printAll();
 
-    
-
-    std::cout << "testing femgrid" << std::endl;
 
     FEMGrid femGrid(elements, GlobalData::numberOfElements);
-    femGrid.printAll();
+ //   femGrid.printAll();
+    for (int i = 0; i < GlobalData::numberOfElements; ++i) {
+        femGrid.elements[i].calculateAll();
+        femGrid.elements[i].printLocalMatrixes();
+    }
+
+
+    femGrid.printGlobalHMatrix();
+
+    femGrid.calculateGlobalHMatrix();
+
+    femGrid.printGlobalHMatrix();
+
+    femGrid.calculateGlobalPVector();
+
+    femGrid.printGlobalPVector();
+
 
 /*
     for (int i=0; i < GlobalData::numberOfNodes; ++i)

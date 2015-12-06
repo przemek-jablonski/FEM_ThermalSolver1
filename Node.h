@@ -20,11 +20,11 @@ public:
 
     }
 
-    Node(int nodeID, float boundaryCondition1, float boundaryCondition2) {
+    Node(int nodeID, float thermalStreamQ = 0, float alpha = 0, float tInfinity = 0) {
         this->nodeID = nodeID;
         temperature= -666;
-        this->boundaryCondition1 = boundaryCondition1;
-        this->boundaryCondition2 = boundaryCondition2;
+        this->boundaryCondition1 = thermalStreamQ;
+        this->boundaryCondition2 = tInfinity * alpha;
     }
 
     void print(){

@@ -28,7 +28,53 @@ public:
             std::cout<< "Printing FEMGrid() " << i <<":" <<std::endl;
             elements[i].print();
         }
+    }
 
+    void printGlobalHMatrix() {
+        std::cout << "\nGLOBAL H MATRIX:" << std::endl;
+        for (int i = 0; i < globalHMatrix.size(); ++i){
+            std::cout << "[ ";
+            for (int j = 0 ; j < globalHMatrix[i].size(); ++j) {
+                std::cout << globalHMatrix[i][j] << " ";
+            }
+            std::cout << "]" << std::endl;
+        }
+    }
+
+    void printGlobalPVector() {
+        std::cout << "\nGLOBAL P VECTOR:" << std::endl;
+        for (int i = 0; i < globalPVector.size(); ++i){
+            std::cout << "[ ";
+            for (int j = 0 ; j < globalPVector[i].size(); ++j) {
+                std::cout << globalPVector[i][j] << " ";
+            }
+            std::cout << "]" << std::endl;
+        }
+    }
+
+    void calculateGlobalHMatrix() {
+        for (int e = 0 ; e < elementsCount; ++e) {
+            for (int i = 0 ; i < elements[e].localHMatrix.size(); ++i) {
+                for (int j = 0 ; j < elements[e].localHMatrix[i].size(); ++j) {
+                    globalHMatrix[i+e][j+e] += elements[e].localHMatrix[i][j];
+                }
+            }
+        }
+    }
+
+    void calculateGlobalPVector(){
+        //initializeGlobalPVector();  <- in constructor, FIX!
+        for (int e = 0 ; e < elementsCount; ++e) {
+            for (int j = 0 ; j < elements[e].localPVector.size(); ++j) {
+                globalPVector[j+e][0] += elements[e].localPVector[j][0];
+            }
+        }
+
+    }
+
+private:
+    void initializeGlobalPVector() {
+        //is in constructor - FIX DAT SHIT
     }
 
 
